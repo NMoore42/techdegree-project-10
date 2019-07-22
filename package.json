@@ -1,0 +1,32 @@
+{
+  "name": "techdegree-project-10",
+  "version": "1.0.0",
+  "description": "Project 10 for FSTD through Team Trehouse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NMoore42/techdegree-project-10.git"
+  },
+  "author": "Nick Moore",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NMoore42/techdegree-project-10/issues"
+  },
+  "homepage": "https://github.com/NMoore42/techdegree-project-10#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "method-override": "^3.0.0",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.4",
+    "sequelize": "^5.10.1",
+    "sequelize-cli": "^5.5.0",
+    "sqlite3": "^4.0.9"
+  }
+}
