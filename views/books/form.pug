@@ -10,7 +10,14 @@ p
 p
   label(for="year") Year
   input(type="text", name="year" value=book.year)
-p
-  input(type="submit", value="Create New Book")
+if editPage
+  p
+    input(type="submit", value="Edit Book")
+else
+  p
+    input(type="submit", value="Create New Book")
 p
   a(class="button", href="/books") Cancel
+if editPage
+  p
+    input(type="submit", value="Delete Book")

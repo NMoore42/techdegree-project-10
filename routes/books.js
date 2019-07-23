@@ -13,15 +13,23 @@ router.get('/', (req, res, next) => {
 
 //Shows create new book form
 router.get('/new', (req, res, next) => {
-  res.render('books/new', {book: {}, title: 'New Book'})
-})
+  res.render('books/new-book', {book: {}, title: 'New Book'})
+});
+
+//Shows update book form
+router.get('/:id/edit', (req, res, next) => {
+  Book.findByPk(req.params.id)
+    .then( book => {
+      if (book) {
+        res.render("books/update-book", {book: book, title: "Edit Book", editPage: true})
+      } else {
+        res.send(404)
+      }
+    })
+    .catch( err => res.send(500, err))
+});
 
 
-
-// /* Create a new book form. */
-// router.get('/new', function(req, res, next) {
-//   res.render("books/new", {book: {}, title: "New Book"});
-// });
 
 // /* POST create book. */
 // router.post('/', function(req, res, next) {
@@ -38,23 +46,9 @@ router.get('/new', (req, res, next) => {
 //    });
 // ;});
 
-// /* Create a new book form. */
-// router.get('/new', function(req, res, next) {
-//   res.render("books/new", {book: {}, title: "New Book"});
-// });
 
-// /* Edit book form. */
-// router.get("/:id/edit", function(req, res, next){
-//   Book.findByPk(req.params.id).then(function(book){
-//     if(book) {
-//       res.render("books/edit", {book: book, title: "Edit Book"});
-//     } else {
-//       res.send(404);
-//     }
-//   }).catch(function(error){
-//       res.send(500, error);
-//    });
-// });
+
+
 
 
 // /* Delete book form. */
