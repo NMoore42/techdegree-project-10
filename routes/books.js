@@ -30,14 +30,21 @@ router.get('/:id', (req, res, next) => {
 });
 
 //Posts a new book to the database
-router.post('/', (req, res, next) => {
+router.post('/new', (req, res, next) => {
   Book.create(req.body)
-    .then( book => res.redirect('/'))
+    .then( books => res.redirect('/'))
+    .catch( err => {
+      if (err.name === "SequelizeValidationError") {
+        res.render('books/new-book', {book: Book.build(req.body), errors: err.errors, title: "New Book"})
+      } else {
+        throw err
+      }
+    })
     .catch( err => res.send(500, err))
 })
 
 //Patches a book in the database
-router.put('/:id', (req, res, next) => {
+router.post('/:id', (req, res, next) => {
   Book.findByPk(req.params.id)
     .then( book => {
       if (book) {
@@ -47,8 +54,24 @@ router.put('/:id', (req, res, next) => {
       }
     })
     .then( book => res.redirect('/'))
+    .catch( err => {
+      if (err.name === "SequelizeValidationError") {
+        let book = Book.build(req.body)
+        book.id = req.params.id
+        res.render('books/update-book', {book: book, errors: err.errors, editPage: true, title: "Edit Book"})
+      } else {
+        throw err
+      }
+    })
     .catch( err => res.send(500, err))
 })
+
+// if(error.name === 'SequelizeValidationError') {
+//     var book = Book.build(req.body);
+//     book.id = req.params.id;
+//     res.render("books/edit",{book:book,errors:error.errors,title:"Edit Book",currentPage:currentPage});
+//   } else {
+//     throw error;
 
 //Deletes a book from database
 router.delete('/:id', (req, res, next) => {
